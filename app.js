@@ -6,5 +6,8 @@ request({
     json: true // this is gonna be request to confirm that it is a json data
 } , (error , response , body) => {
     // JSON.stringify(body , no value here and just put undefined , this is where you can put number of space you want)
-    console.log(JSON.stringify(body , undefined , 2));
+    // console.log(JSON.stringify(body , undefined , 2));
+    console.log(`Address : ${body.results[0].formatted_address}`);
+    console.log(`Latitude : ${body.results[0].geometry.location.lat}`);
+    console.log(`Longitude : ${body.results[0].geometry.location.lng}`);
 });
