@@ -23,18 +23,23 @@ var requestURL = () => {
             url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(argv.a)}` + `&key=AIzaSyCXPEMdRWN-Uhy_iI5dv1O-p3-NgPBHokk`,
             json: true // this is gonna be request to confirm that it is a json data
         }, (error, response, body) => {
-            // JSON.stringify(body , no value here and just put undefined , this is where you can put number of space you want)
-            // console.log(JSON.stringify(body , undefined , 2));
-            console.log(`\n\nAddress : ${body.results[0].formatted_address}`);
-            console.log("--------------------------------------");
-            console.log(`Latitude : ${body.results[0].geometry.location.lat}`);
-            console.log("--------------------------------------");
-            
-            console.log(`Longitude : ${body.results[0].geometry.location.lng}`);
-            console.log("--------------------------------------");
-            
-            console.log("\n\nYour address data\n\n", JSON.stringify(body.results[0], undefined , 2));
-            
+            if(error){
+                // If error exist
+                console.log('Unable to connect to Google Servers');
+            }else if(body.status === "ZERO_RESULTS"){
+                console.log(`\nUnable to define your address : \n \"${argv.a}\"`);
+            } else if (body.status === 'OK'){
+                console.log(`\n\nEncode Search URI : \n${response.request.uri.search}\n\n`);
+                console.log(`\n\nAddress : ${body.results[0].formatted_address}`);
+                console.log("--------------------------------------");
+                console.log(`Latitude : ${body.results[0].geometry.location.lat}`);
+                console.log("--------------------------------------");
+
+                console.log(`Longitude : ${body.results[0].geometry.location.lng}`);
+                console.log("--------------------------------------");
+
+                console.log("\n\nYour address data\n\n", JSON.stringify(body.results[0], undefined, 2));
+            }
         });
     }
     else{
@@ -42,11 +47,14 @@ var requestURL = () => {
             url: `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA` + `&key=AIzaSyCXPEMdRWN-Uhy_iI5dv1O-p3-NgPBHokk`,
             json: true // this is gonna be request to confirm that it is a json data
         }, (error, response, body) => {
-            // JSON.stringify(body , no value here and just put undefined , this is where you can put number of space you want)
-            // console.log(JSON.stringify(body , undefined , 2));
-            console.log(`Address : ${body.results[0].formatted_address}`);
-            console.log(`Latitude : ${body.results[0].geometry.location.lat}`);
-            console.log(`Longitude : ${body.results[0].geometry.location.lng}`);
+            if (error) {
+                // If error exist
+                console.log('Unable to connect to Google Servers');
+            } else if (body.status === "OK") {
+                console.log(`Address : ${body.results[0].formatted_address}`);
+                console.log(`Latitude : ${body.results[0].geometry.location.lat}`);
+                console.log(`Longitude : ${body.results[0].geometry.location.lng}`);
+            }
         });
     }
 }
