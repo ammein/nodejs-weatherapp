@@ -1,3 +1,4 @@
+// require('dotenv').config({path : './'});
 const yargs = require('yargs');
 const request = require('request');
 const argv = yargs.options({
@@ -12,6 +13,8 @@ const argv = yargs.options({
 .help()
 .alias('help' , 'h') // for shortcut run --help or -h
 .argv;
+// const key = process.env.SECRET_KEY;
+// console.log(key);
 // console.log("argv",argv);
 // console.log(argv.a);
 // console.log(api.WEATHER_API_KEY);
