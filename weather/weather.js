@@ -17,7 +17,7 @@ var getWeather = (lat , lng , callbacks) => {
         }
     });
 }
-
+//6cdc3b3fc66b8e676da68497bbca52f6
 module.exports = {
     getWeather
 }
